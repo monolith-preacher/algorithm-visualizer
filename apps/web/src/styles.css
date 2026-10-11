@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/600.css';
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --color-bg: #07090d;
+  --color-surface: #0b0f15;
+  --color-panel: #0e131a;
+  --color-raised: #131a23;
+  --color-hover: #18202b;
+  --color-line: #1c2430;
+  --color-line-strong: #283241;
+
+  --color-fg: #d6dde7;
+  --color-muted: #8793a3;
+  --color-faint: #566172;
+
+  --color-accent: #3ddc97;
+  --color-accent-dim: #1f7a56;
+  --color-cyan: #22d3ee;
+  --color-cyan-dim: #0e7490;
+
+  /* Visualization states */
+  --color-st-compare: #f5b942;
+  --color-st-swap: #ff5c7a;
+  --color-st-write: #a78bfa;
+  --color-st-read: #60a5fa;
+  --color-st-sorted: #3ddc97;
+  --color-st-pivot: #22d3ee;
+  --color-st-base: #3a4a5f;
+  --color-st-danger: #f43f5e;
+
+  --animate-pulse-soft: pulse-soft 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    font-feature-settings: 'cv11', 'ss01';
+    color-scheme: dark;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-line-strong) transparent;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--color-cyan) 30%, transparent);
+  }
+  :focus-visible {
+    outline: 1px solid var(--color-cyan);
+    outline-offset: 1px;
+  }
+}
+
+@layer base {
+  /* Program output and code must show the exact characters (no "->" ligatures). */
+  .font-mono,
+  code,
+  pre,
+  kbd {
+    font-variant-ligatures: none;
+  }
+}
+
+@layer components {
+  .panel-title {
+    @apply font-mono text-[10.5px] font-medium tracking-[0.12em] text-muted uppercase;
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 55%, transparent) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: -1px -1px;
+  }
+  .input {
+    @apply h-7 rounded border border-line bg-surface px-2 font-mono text-xs text-fg outline-none transition-colors placeholder:text-faint focus:border-cyan-dim;
+  }
+}
+
+/* Monaco: execution line and debugger decorations */
+.av-exec-line {
+  background: color-mix(in srgb, var(--color-cyan) 13%, transparent);
+  box-shadow: inset 2px 0 0 var(--color-cyan);
+}
+.av-exec-glyph::before {
+  content: '';
+  display: block;
+  margin: 5px 0 0 6px;
+  border-left: 7px solid var(--color-cyan);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.av-crash-line {
+  background: color-mix(in srgb, var(--color-st-danger) 16%, transparent);
+  box-shadow: inset 2px 0 0 var(--color-st-danger);
+}
+.av-frame-line {
+  background: color-mix(in srgb, var(--color-st-compare) 9%, transparent);
+}
+.av-breakpoint-glyph::before,
+.av-breakpoint-hint::before {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 9px;
+  margin: 5px 0 0 5px;
+  border-radius: 50%;
+  background: var(--color-st-danger);
+}
+.av-breakpoint-hint::before {
+  opacity: 0.35;
+}
+.av-trace-line {
+  opacity: 0.45;
+  font-style: italic;
+}
+.monaco-editor .margin,
+.monaco-editor,
+.monaco-editor-background {
+  background-color: var(--color-panel) !important;
+}

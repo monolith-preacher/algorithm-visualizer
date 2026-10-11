@@ -1,0 +1,26 @@
+{
+  "name": "@av/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false src/index.ts",
+    "build": "tsup src/index.ts --format esm --target node20 --clean --sourcemap",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "ws": "^8.22.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@av/shared": "*",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.18.2",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15"
+  }
+}

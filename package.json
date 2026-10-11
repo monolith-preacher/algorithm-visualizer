@@ -1,0 +1,39 @@
+{
+  "name": "algorithm-visualizer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive visualizer for algorithms and data structures implemented in C, with a sandboxed C playground and a GDB-based visual debugger.",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "packages/shared",
+    "apps/server",
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build:clib": "make -C clib",
+    "build:sandbox": "docker build -t algoviz-sandbox:latest sandbox",
+    "build": "npm run build:clib && npm run build -w @av/server && npm run build -w @av/web",
+    "dev": "npm run build:clib && concurrently -k -n server,web -c cyan,green \"npm run dev -w @av/server\" \"npm run dev -w @av/web\"",
+    "start": "npm run start -w @av/server",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint .",
+    "test": "npm run test:c && npm run test:ts",
+    "test:c": "make -C clib test",
+    "test:ts": "npm run build:clib && vitest run",
+    "test:sandbox": "AV_SANDBOX_TESTS=1 vitest run apps/server/test/sandbox"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "concurrently": "^10.0.6",
+    "eslint": "^9.39.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^5.0.3"
+  }
+}

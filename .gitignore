@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+clib/build/
+*.tsbuildinfo
+
+# C artifacts
+*.o
+*.a
+*.so
+*.out
+a.out
+core
+core.*
+vgcore.*
+
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+tmp/
+.cache/
+coverage/
+
+# Editors and OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
