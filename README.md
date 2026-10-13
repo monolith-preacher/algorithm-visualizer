@@ -1,5 +1,8 @@
 # Algorithm Visualizer
 
+[![CI](https://github.com/monolith-preacher/algorithm-visualizer/actions/workflows/ci.yml/badge.svg)](https://github.com/monolith-preacher/algorithm-visualizer/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 An interactive laboratory for algorithms, data structures and memory, built around **C**.
 
 - **Algorithm Lab** — a library of algorithms and data structures written in C. Every animation is derived from the execution of the real C implementation: the instrumented program emits a structured trace, and the UI replays it next to the source code, the call stack and the live variables.
@@ -75,7 +78,7 @@ An interactive laboratory for algorithms, data structures and memory, built arou
 ## Quick start
 
 ```bash
-git clone <repository-url> algorithm-visualizer
+git clone https://github.com/monolith-preacher/algorithm-visualizer
 cd algorithm-visualizer
 scripts/setup.sh            # npm install, build clib, build the sandbox image
 npm run dev                 # API on :3001, web app on http://127.0.0.1:5173
